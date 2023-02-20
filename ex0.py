@@ -12,8 +12,8 @@ url = input("URL: ")
 with requests.get(url) as response:  # το αντικείμενο response
     # 3. headers 
     headers = response.headers
-
-    print(f"Headers:\n{'\n'.join([f"{header}: {headers[header]}" for header in headers])}")
+    h = '\n'.join([f"{header}: {headers[header]}" for header in headers])
+    print(f"Headers:\n{h}")
 
     # 4. Πληροφοριες για την ιστοσελιδα
 
