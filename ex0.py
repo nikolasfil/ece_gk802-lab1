@@ -2,25 +2,24 @@
 import requests
 import datetime
 
-# 1.
-# url = input("URL: ")
-url = "http://python.org/"
-# url = "https://www.youtube.com"
+# 1. παιρνει url απο τον χρηστη
+url = input("URL: ")
+# url = "http://python.org/" # Doesn't have cookies
+# url = "https://www.youtube.com" # Has Cookies
 
 
-# 2.
-# Πραγματοποιηση αιτηματος 
+# 2.Πραγματοποιηση αιτηματος http request
 with requests.get(url) as response:  # το αντικείμενο response
-    # 3.
+    # 3. headers 
     headers = response.headers
-    # more(headers)
-    print(f'Headers: {headers}')
 
-    # 4.
-    print(f'\nSoftware of the server: {headers["Server"]}\n')
+    print(f"Headers:\n{'\n'.join([f"{header}: {headers[header]}" for header in headers])}")
+
+    # 4. Πληροφοριες για την ιστοσελιδα
+
+    print(f'\nSoftware of the server: {headers["Server"] if "Server" in headers.keys() else "No information available"}')
 
     if "set-cookie" in headers.keys():
-        # cookies_keys = response.cookies.keys
         cookies = response.cookies
         for cookie in cookies:
             print(f"\nThe site uses cookie.\nName: {cookie.name}\nValue: {cookie.value}\nExpiration Date: {datetime.datetime.fromtimestamp(float(cookie.expires)) if cookie.expires is not None else 'Does Not Expire'}")        
